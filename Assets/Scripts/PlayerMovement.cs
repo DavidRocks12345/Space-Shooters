@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public Vector2 turn;
-    public float speed = 10f;
+    public float speed;
+    public int shields;
     Rigidbody rigidbody;
     // Start is called before the first frame update
     void Start()
@@ -40,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
         if(Vector2.Distance(transform.position, direction)<=0.25){
             return;
         }
-        float step = speed * Time.deltaTime;
+        float step = (speed / 100) * Time.deltaTime;
         transform.position = Vector2.MoveTowards(transform.position, direction, step);
     }
 }

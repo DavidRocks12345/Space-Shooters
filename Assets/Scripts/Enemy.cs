@@ -54,6 +54,7 @@ public class Enemy : MonoBehaviour
         source.clip = clip;
         source.Play();
         //switchScene();
+        SaveHighScore.SaveToJson();
         Invoke("switchScene", 1.25f);
     }
 
