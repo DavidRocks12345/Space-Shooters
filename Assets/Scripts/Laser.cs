@@ -27,7 +27,8 @@ public class Laser : MonoBehaviour
         
        if (other.tag=="Enemy")
        {
-            UIHandler.Score += 10;
+            UIHandler.Score += 300;
+            PlayerManagement.player.creditCounter+=25;
             audioSource.Play();
             Destroy(other.gameObject);
             Explodehelper.exploder.Explode(this.transform.position);

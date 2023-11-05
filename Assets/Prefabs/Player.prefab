@@ -378,7 +378,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turn: {x: 35, y: 0}
-  speed: 250
+  speed: 800
+  shields: 0
 --- !u!65 &2231847164032353016
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -419,6 +420,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletSpawnpoint: {fileID: 9063988672331582622}
   BulletPrefab: {fileID: 6805539388235723184, guid: f04ecb083068f4e3c9a6d842f06b9923, type: 3}
+  audioSource: {fileID: 0}
+  zap: {fileID: 0}
 --- !u!82 &4112927881806256745
 AudioSource:
   m_ObjectHideFlags: 0

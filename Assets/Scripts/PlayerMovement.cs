@@ -18,8 +18,21 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     { 
        // PlayerRotate();
+       CheckShipType();
        ChangePlayerPosition();
     } 
+    void CheckShipType()
+    {
+        if(PlayerManagement.player.equippedShip==ShipType.StarterShip){
+            speed=4f;
+        }
+        if(PlayerManagement.player.equippedShip==ShipType.RedShip){
+            speed=5f;
+        }
+        if(PlayerManagement.player.equippedShip==ShipType.CopperShip){
+            speed=6f;
+        }
+    }
     void PlayerRotate()
     {
         Vector2 direction = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
@@ -41,7 +54,9 @@ public class PlayerMovement : MonoBehaviour
         if(Vector2.Distance(transform.position, direction)<=0.25){
             return;
         }
-        float step = (speed / 100) * Time.deltaTime;
-        transform.position = Vector2.MoveTowards(transform.position, direction, step);
+       
+        Vector3 targetPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
+        Debug.Log(targetPosition);
+        transform.position = Vector2.Lerp(transform.position, targetPosition, speed*Time.deltaTime);
     }
 }

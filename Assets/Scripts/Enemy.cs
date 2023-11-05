@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
     //static Transform playerLocation;
     public AudioSource source;
     public AudioClip clip;
+    public int AttackDamage = 25;
+    
     Vector3 EndingLocation;
     void Awake(){
         /*float endx = Mathf.Clamp(transform.position.x, -5, 5);
@@ -18,6 +20,7 @@ public class Enemy : MonoBehaviour
         EndingLocation = new Vector3(transform.position.x, -100,0);
         transform.LookAt(EndingLocation);
         transform.up=new Vector3(0,0,1);
+        
     }
     void Start(){
         source = GetComponent<AudioSource>();
@@ -49,14 +52,22 @@ public class Enemy : MonoBehaviour
     }
     
     void OnCollisionEnter(Collision collision){
-    if(collision.gameObject.tag == "Player"){
-        Destroy(collision.gameObject);
-        source.clip = clip;
-        source.Play();
-        //switchScene();
-        SaveHighScore.SaveToJson();
-        Invoke("switchScene", 1.25f);
-    }
+        if(collision.gameObject.tag == "Player"){
 
-}
+            PlayerManagement.player.TakeDamage(AttackDamage);
+
+            source.clip = clip;
+            source.Play();
+
+            if(PlayerManagement.player.playerHealth <= 0)
+            {
+                Destroy(collision.gameObject);
+                Debug.Log("Player Destroyed");
+                SaveHighScore.SaveToJson();
+                Invoke("switchScene", 1.25f);
+            }
+        
+
+        }  
+    }
 }
