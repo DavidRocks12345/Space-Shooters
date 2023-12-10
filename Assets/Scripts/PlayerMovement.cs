@@ -41,19 +41,6 @@ public class PlayerMovement : MonoBehaviour
     }
     void ChangePlayerPosition()
     {
-#if UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX
-        Vector3 direction = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-        direction = new Vector3(direction.x, direction.y, 0);
-        // FIX THIS IN THE FUTURE!!!
-    
-#else
-        Vector3 direction = Vector3.Lerp(AREyeManager.LeftEyeLocation, AREyeManager.RightEyeLocation, 0.5f);
-        direction = new Vector3(direction.x, direction.y, 0);
-        
-#endif
-        if(Vector2.Distance(transform.position, direction)<=0.25){
-            return;
-        }
        
         Vector3 targetPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
         Debug.Log(targetPosition);
